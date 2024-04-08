@@ -49,7 +49,8 @@ and(C,B,Borrow).
 ```
 ### Output:
 ![Screenshot 2024-04-08 112800](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/f6c51688-d869-48a5-aae5-81e82d2de347)
-![Screenshot 2024-04-08 112800](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/73e94543-b10e-47d6-8780-c8261fd0219f)
+![Screenshot 2024-04-08 113100](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/6c4625e9-8f98-49d2-b44c-4870eb461ced)
+
 
 ### Result:
 Thus the truth table of circuit verified sucessfully.
