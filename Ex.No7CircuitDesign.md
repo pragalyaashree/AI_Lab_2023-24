@@ -1,5 +1,5 @@
 # Ex.No: 7  Logic Programming –  Logic Circuit Design
-### DATE:                                                                            
+### DATE: 24/03/2024                                                                       
 ### REGISTER NUMBER : 212221040125
 ### AIM: 
 To write a logic program to design a circuit like half adder and half subtractor.
@@ -48,7 +48,8 @@ not(A,C),
 and(C,B,Borrow).
 ```
 ### Output:
-![Screenshot 2024-04-08 112321](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/ed946ff4-536b-47a6-b434-2e1d2f1c4aa6)
+![Screenshot 2024-04-08 112800](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/f6c51688-d869-48a5-aae5-81e82d2de347)
+![Screenshot 2024-04-08 112800](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/73e94543-b10e-47d6-8780-c8261fd0219f)
 
 ### Result:
 Thus the truth table of circuit verified sucessfully.
