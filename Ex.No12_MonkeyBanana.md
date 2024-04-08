@@ -66,6 +66,7 @@ monkey ?y)
 ```
 ### Input 
 ### Problem 1:
+```
 (define (problem pb1)
 (:domain monkey)
 (:objects p1 p2 p3 p4 bananas monkey box knife)
@@ -81,6 +82,7 @@ monkey ?y)
 )
 (:goal (and (hasbananas)))
 )
+```
 ### Output/Plan:
 ### Problem 1:
 ![Screenshot 2024-04-08 153619](https://github.com/pragalyaashree/AI_Lab_2023-24/assets/128135934/b02c1f19-6372-4ef5-bd60-7d2ceefba4d3)
