@@ -3,9 +3,85 @@
 ### REGISTER NUMBER : 212221040125
 ### AIM:
 To write a program to train the classifier for Movie Recommendations.
+
 ###  Algorithm:
 
+1. Collect Data: Gather movie dataset.
+2. Preprocess Data: Clean and normalize.
+3. Engineer Features: Extract relevant characteristics.
+4. Profile Users: Capture preferences.
+5. Select Algorithm: Choose recommendation approach.
+6. Train Model: Teach the system.
+7. Generate Recommendations: Offer suggestions.
+8. Evaluate Performance: Assess accuracy.
+9. Deploy System: Integrate into interface.
+10.Iterate Based on Feedback: Improve over time.
+
 ### Program:
+
+# Importing libraries
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from scipy.stats import pearsonr
+import numpy as np
+
+# Load the dataset
+data = pd.read_csv('movies.csv')
+
+# Preprocess the dataset
+data.fillna({'overview': '', 'genres': '', 'cast': ''}, inplace=True)
+
+# Content-Based Filtering using TF-IDF and Cosine Similarity
+tfidf_vectorizer = TfidfVectorizer(stop_words='english')
+tfidf_matrix = tfidf_vectorizer.fit_transform(data['overview'])
+cosine_similarity_matrix = tfidf_matrix * tfidf_matrix.T
+
+# Function to get movie recommendations using content-based filtering
+def content_based_recommendations(title, cosine_sim=cosine_similarity_matrix):
+    idx = data[data['original_title'] == title].index[0]
+    sim_scores = list(enumerate(cosine_sim[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:11]  # Top 10 recommendations
+    movie_indices = [i[0] for i in sim_scores]
+    return data['original_title'].iloc[movie_indices]
+
+# Function to calculate Pearson correlation coefficient
+def pearson_correlation(x, y):
+    if len(x) < 2:
+        return 0
+    corr, _ = pearsonr(x, y)
+    return corr
+
+# Function to get movie recommendations using Pearson Correlation
+def pearson_correlation_recommendations(title):
+    pearson_correlation_scores = []
+    target_movie_ratings = data['vote_average'][data['original_title'] == title]
+    for index, row in data.iterrows():
+        corr = pearson_correlation(target_movie_ratings, row['vote_average'])
+        pearson_correlation_scores.append((row['original_title'], corr))
+    pearson_correlation_scores = sorted(pearson_correlation_scores, key=lambda x: x[1], reverse=True)
+    pearson_correlation_scores = pearson_correlation_scores[1:11]  # Top 10 recommendations
+    return [x[0] for x in pearson_correlation_scores]
+
+# Function for popularity-based recommendations
+def popularity_based_recommendations():
+    return data.sort_values(by='vote_average', ascending=False)['original_title'][:10]
+
+# Input from the user
+movie_title = input("Enter a movie title: ")
+
+# Get recommendations
+content_based_recs = content_based_recommendations(movie_title)
+pearson_recs = pearson_correlation_recommendations(movie_title)
+popularity_recs = popularity_based_recommendations()
+
+# Combine recommendations from different models
+ensemble_recommendations = np.unique(np.concatenate((content_based_recs, pearson_recs, popularity_recs), axis=None))[:10]
+
+# Print the ensemble recommendations
+print("Ensemble Recommendations for", movie_title, ":")
+for idx, title in enumerate(ensemble_recommendations):
+    print(f"{idx+1}. {title}")
 
 
 ### Output:
